@@ -21,6 +21,20 @@
                ReferencedContainer = "container:TimerTool.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F897BC872DE8CA34009D842E"
+               BuildableName = "TimerTool Watch App.app"
+               BlueprintName = "TimerTool Watch App"
+               ReferencedContainer = "container:TimerTool.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

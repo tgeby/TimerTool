@@ -10,16 +10,6 @@
 		F897BC892DE8CA34009D842E /* TimerTool Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F897BC882DE8CA34009D842E /* TimerTool Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		F897BC9D2DE8D0AA009D842E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F897BC732DE8CA32009D842E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F897BC872DE8CA34009D842E;
-			remoteInfo = "TimerTool Watch App";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		F897BC982DE8CA35009D842E /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -111,7 +101,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F897BC9E2DE8D0AA009D842E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				F897BC7D2DE8CA33009D842E /* TimerTool */,
@@ -216,14 +205,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F897BC9E2DE8D0AA009D842E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F897BC872DE8CA34009D842E /* TimerTool Watch App */;
-			targetProxy = F897BC9D2DE8D0AA009D842E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		F897BC932DE8CA35009D842E /* Debug */ = {
@@ -345,8 +326,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TimerTool Watch App/TimerTool Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
@@ -373,8 +356,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TimerTool Watch App/TimerTool Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
@@ -402,8 +387,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimerTool/TimerTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
@@ -432,8 +419,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimerTool/TimerTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
