@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F897BC892DE8CA34009D842E /* TimerTool Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F897BC882DE8CA34009D842E /* TimerTool Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F8E932E62DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */; };
+		F8E932E72DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */; };
+		F8E932E92DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */; };
+		F8E932EA2DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +41,8 @@
 /* Begin PBXFileReference section */
 		F897BC7B2DE8CA33009D842E /* TimerTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F897BC882DE8CA34009D842E /* TimerTool Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TimerTool Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedIntervalManager.swift; sourceTree = "<group>"; };
+		F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -73,6 +79,7 @@
 		F897BC722DE8CA32009D842E = {
 			isa = PBXGroup;
 			children = (
+				F8E932E42DEAA50400BCFB46 /* Shared */,
 				F897BC7D2DE8CA33009D842E /* TimerTool */,
 				F897BC8C2DE8CA34009D842E /* TimerTool Watch App */,
 				F897BC9C2DE8D0AA009D842E /* Frameworks */,
@@ -94,6 +101,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8E932E42DEAA50400BCFB46 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */,
+				F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +221,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E932E62DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */,
+				F8E932E92DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +230,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E932EA2DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */,
+				F8E932E72DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,8 +365,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TimerTool Watch App/TimerTool Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
@@ -373,8 +395,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TimerTool Watch App/TimerTool Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
@@ -402,8 +426,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimerTool/TimerTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
@@ -432,8 +458,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimerTool/TimerTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
