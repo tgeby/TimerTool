@@ -19,10 +19,13 @@ struct ContentView: View {
                             .dynamicTypeSize(.medium ... .xxLarge)
                         .padding()
                     NavigationLink(destination: EnterIntervalView()) {
-                        Text("Click here to register a sequence of intervals for your watch app.")
+                        Text("Create a new interval sequence")
                             .padding()
                     }
-
+                    NavigationLink(destination: LibraryView()) {
+                        Text("Manage interval sequences")
+                            .padding()
+                    }
 //                    NavigationLink(destination: TestView()) {
 //                        Text("Test view")
 //                            .padding()

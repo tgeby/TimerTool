@@ -11,7 +11,8 @@ import SwiftUI
 struct TimerToolApp: App {
     
     init() {
-        WCSessionManager.shared // Activate session early
+        _ = WCSessionManager.shared // Activate session early
+        // Initializes the singleton, which activates WCSession in its init. `_ =` avoids unused result warning.
     }
     
     var body: some Scene {

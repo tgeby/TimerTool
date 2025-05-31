@@ -35,14 +35,14 @@ class WCSessionManager: NSObject, WCSessionDelegate {
     // Handle incoming data
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         if let data = message["intervalsData"] as? Data,
-           let decoded = try? JSONDecoder().decode([[Interval]].self, from: data) {
+           let decoded = try? JSONDecoder().decode([IntervalSequence].self, from: data) {
             SharedIntervalManager.shared.saveIntervalSequences(decoded)
         }
     }
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
         if let data = userInfo["intervalsData"] as? Data,
-           let decoded = try? JSONDecoder().decode([[Interval]].self, from: data) {
+           let decoded = try? JSONDecoder().decode([IntervalSequence].self, from: data) {
             SharedIntervalManager.shared.saveIntervalSequences(decoded)
         }
     }

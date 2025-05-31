@@ -14,7 +14,8 @@ struct EnterIntervalView: View {
     @State private var newIntervalLength: String = ""
     @State private var newIntervalIsRest: Bool = false
     @State private var storedIntervals: [[Interval]] = []
-    @State private var showStoredInterval: Bool = false
+//    @State private var showStoredInterval: Bool = false
+    @State private var newIntervalName: String = ""
     
     func addIntervalButton() {
         if let seconds = Int(newIntervalLength), seconds > 0 {
@@ -41,6 +42,7 @@ struct EnterIntervalView: View {
         VStack(spacing: 16) {
             // Input for new interval length
             Spacer()
+            TextField("Interval Sequence Name", text: $newIntervalName)
             HStack {
                 TextField("Seconds", text: $newIntervalLength)
                     .keyboardType(.numberPad)
@@ -50,7 +52,7 @@ struct EnterIntervalView: View {
                     .font(.caption)
                 Button(action: {
                     addIntervalButton()
-                    newIntervalIsRest = false
+                    newIntervalIsRest.toggle()
                     }) {
                     Text("Add Interval")
                 }
@@ -68,8 +70,9 @@ struct EnterIntervalView: View {
                 }
             }
             Button (action: {
-                SharedIntervalManager.shared.appendIntervalSequence(intervals)
+                SharedIntervalManager.shared.appendIntervalSequence(intervals, newIntervalName)
                 intervals = []
+                newIntervalName = ""
             }) {
                 Text("Submit")
             }
