@@ -1,0 +1,18 @@
+# Build artifacts
+build/
+DerivedData/
+
+# Xcode user-specific data
+*.xcuserstate
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Keep shared schemes
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/xcshareddata/xcschemes/
+!*.xcodeproj/xcshareddata/xcschemes/*.xcscheme
+
+# OS / Editor noise
+.DS_Store
+.idea/
+*.orig
