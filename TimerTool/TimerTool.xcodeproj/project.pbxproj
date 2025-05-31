@@ -10,6 +10,8 @@
 		F897BC892DE8CA34009D842E /* TimerTool Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F897BC882DE8CA34009D842E /* TimerTool Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F8E932E62DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */; };
 		F8E932E72DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */; };
+		F8E932E92DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */; };
+		F8E932EA2DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,7 @@
 		F897BC7B2DE8CA33009D842E /* TimerTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F897BC882DE8CA34009D842E /* TimerTool Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TimerTool Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedIntervalManager.swift; sourceTree = "<group>"; };
+		F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -104,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E932E52DEAA53B00BCFB46 /* SharedIntervalManager.swift */,
+				F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -218,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8E932E62DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */,
+				F8E932E92DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E932EA2DEAB6BE00BCFB46 /* WCSessionManager.swift in Sources */,
 				F8E932E72DEAA53B00BCFB46 /* SharedIntervalManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

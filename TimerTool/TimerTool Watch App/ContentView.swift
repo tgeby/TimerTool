@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world on Apple Watch!")
+            NavigationView {
+                VStack {
+                    NavigationLink(destination: LibraryView()) {
+                        Text("Show stored interval sequences")
+                    }
+                }
+            }
         }
         .padding()
     }

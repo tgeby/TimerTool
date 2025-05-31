@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct TimerToolApp: App {
+    
+    init() {
+        WCSessionManager.shared // Activate session early
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

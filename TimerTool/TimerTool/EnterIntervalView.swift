@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchConnectivity
 
 struct EnterIntervalView: View {
     
@@ -20,6 +21,19 @@ struct EnterIntervalView: View {
             let newInterval = Interval(lengthInSeconds: seconds, isRest: newIntervalIsRest)
             intervals.append(newInterval)
             newIntervalLength = "" // Clear input
+        }
+    }
+    
+    func syncIntervalsToWatch() {
+        let intervals = SharedIntervalManager.shared.loadIntervals()
+        guard let data = try? JSONEncoder().encode(intervals) else { return }
+
+        if WCSession.default.isReachable {
+            // Instant message
+            WCSession.default.sendMessage(["intervalsData": data], replyHandler: nil, errorHandler: nil)
+        } else {
+            // Queued for delivery
+            WCSession.default.transferUserInfo(["intervalsData": data])
         }
     }
     
@@ -60,6 +74,11 @@ struct EnterIntervalView: View {
                 Text("Submit")
             }
             Spacer()
+            Button (action: {
+                syncIntervalsToWatch()
+            }) {
+                Text("Send to watch")
+            }
 //            Button (action: {
 //                storedIntervals = SharedIntervalManager.shared.loadIntervals()
 //                showStoredInterval = true
