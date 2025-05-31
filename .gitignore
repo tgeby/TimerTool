@@ -6,7 +6,7 @@ DerivedData/
 *.xcuserstate
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
-**/cxuserdata
+**/*.xcodeproj/xcuserdata
 
 # Keep shared schemes
 !*.xcodeproj/xcshareddata/
