@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct LibraryView: View {
+    
+    @ObservedObject var viewModel: IntervalViewModel
+    
     var body: some View {
-        let intervalSequenceList: [IntervalSequence] = SharedIntervalManager().loadIntervals()
+        let intervalSequenceList: [IntervalSequence] = viewModel.sequences
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 ForEach(intervalSequenceList) { sequence in
@@ -30,5 +33,5 @@ struct LibraryView: View {
 }
 
 #Preview {
-    LibraryView()
+    LibraryView(viewModel: IntervalViewModel())
 }

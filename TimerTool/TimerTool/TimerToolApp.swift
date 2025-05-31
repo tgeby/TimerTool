@@ -9,7 +9,8 @@ import SwiftUI
 
 @main
 struct TimerToolApp: App {
-    
+    @StateObject var viewModel = IntervalViewModel()
+
     init() {
         _ = WCSessionManager.shared // Activate session early
         // Initializes the singleton, which activates WCSession in its init. `_ =` avoids unused result warning.
@@ -17,7 +18,7 @@ struct TimerToolApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: viewModel)
         }
     }
 }

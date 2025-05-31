@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
 
+    @ObservedObject var viewModel: IntervalViewModel
+    
     var body: some View {
         NavigationView {
             ZStack {
                 Color(red: 80/255, green: 200/255, blue: 120/255)
                     .ignoresSafeArea()
-                
                 VStack(spacing: 10) {
-                    NavigationLink(destination: ExerciseView()) {
+                    NavigationLink(destination: ExerciseSelectorView(viewModel: viewModel)) {
                         Text("Use a timer")
                             .frame(width: 150, height: 60)
                             .background(Color.black)
@@ -25,7 +26,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     
-                    NavigationLink(destination: LibraryView()) {
+                    NavigationLink(destination: LibraryView(viewModel: viewModel)) {
                         Text("Manage library")
                             .frame(width: 150, height: 60)
                             .background(Color.black)
@@ -42,5 +43,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: IntervalViewModel())
 }

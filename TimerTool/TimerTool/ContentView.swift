@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var viewModel: IntervalViewModel
+    
     var body: some View {
         VStack {
-            
             NavigationView {
                 VStack {
                     Text("Options")
@@ -18,11 +20,11 @@ struct ContentView: View {
                         .font(.system(size: 50))
                             .dynamicTypeSize(.medium ... .xxLarge)
                         .padding()
-                    NavigationLink(destination: EnterIntervalView()) {
+                    NavigationLink(destination: EnterIntervalView(viewModel: viewModel)) {
                         Text("Create a new interval sequence")
                             .padding()
                     }
-                    NavigationLink(destination: LibraryView()) {
+                    NavigationLink(destination: LibraryView(viewModel: viewModel)) {
                         Text("Manage interval sequences")
                             .padding()
                     }
@@ -39,5 +41,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: IntervalViewModel())
 }
