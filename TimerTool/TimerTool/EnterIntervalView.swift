@@ -7,17 +7,13 @@
 
 import SwiftUI
 
-struct Interval: Identifiable {
-    let id = UUID()
-    let lengthInSeconds: Int
-    let isRest: Bool
-}
-
 struct EnterIntervalView: View {
     
     @State private var intervals: [Interval] = []
     @State private var newIntervalLength: String = ""
     @State private var newIntervalIsRest: Bool = false
+    @State private var storedIntervals: [[Interval]] = []
+    @State private var showStoredInterval: Bool = false
     
     func addIntervalButton() {
         if let seconds = Int(newIntervalLength), seconds > 0 {
@@ -57,7 +53,34 @@ struct EnterIntervalView: View {
                     }
                 }
             }
+            Button (action: {
+                SharedIntervalManager.shared.appendIntervalSequence(intervals)
+                intervals = []
+            }) {
+                Text("Submit")
+            }
             Spacer()
+//            Button (action: {
+//                storedIntervals = SharedIntervalManager.shared.loadIntervals()
+//                showStoredInterval = true
+//            }) {
+//                Text("Print stored interval")
+//            }
+//            if showStoredInterval {
+//                List(storedIntervals[0]) { interval in
+//                    HStack{
+//                        Text("Interval: \(interval.lengthInSeconds) seconds")
+//                        Spacer()
+//                        if interval.isRest {
+//                            Text("Rest set")
+//                        } else {
+//                            Text("Work set")
+//                        }
+//                    }
+//                }
+//            } else {
+//                Text("No stored interval to display now")
+//            }
         }
         .padding()
     }
