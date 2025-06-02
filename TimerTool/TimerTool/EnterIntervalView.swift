@@ -16,41 +16,94 @@ struct EnterIntervalView: View {
     @State private var newIntervalName: String = ""
 
     var body: some View {
-        VStack {
-            TextField("Sequence Name", text: $newIntervalName)
-            HStack {
-                TextField("Seconds", text: $newIntervalLength)
-                    .keyboardType(.numberPad)
-                    .frame(width: 80)
-                Toggle("Rest?", isOn: $newIntervalIsRest)
-                Button("Add") {
-                    if let seconds = Int(newIntervalLength), seconds > 0 {
-                        intervals.append(Interval(lengthInSeconds: seconds, isRest: newIntervalIsRest))
-                        newIntervalLength = ""
-                        newIntervalIsRest.toggle()
+        ScrollView {
+            VStack(spacing: 24) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Create New Sequence")
+                        .font(.headline)
+                    TextField("Sequence Name", text: $newIntervalName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    HStack {
+                        TextField("Seconds", text: $newIntervalLength)
+                            .keyboardType(.numberPad)
+                            .frame(width: 100)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Toggle("Rest?", isOn: $newIntervalIsRest)
+                            .toggleStyle(SwitchToggleStyle(tint: .blue))
+                        Button(action: addInterval) {
+                            Label("Add", systemImage: "plus.circle.fill")
+                        }
+                        .disabled(newIntervalLength.isEmpty)
                     }
                 }
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(12)
+                
+                if !intervals.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("New Intervals")
+                            .font(.headline)
+                        ForEach(intervals) { interval in
+                            HStack {
+                                Text("\(interval.lengthInSeconds)s")
+                                Spacer()
+                                Text(interval.isRest ? "Rest" : "Work")
+                                    .foregroundColor(interval.isRest ? .blue : .green)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                }
+                
+                VStack (spacing: 10) {
+                    Button(action: submitSequence) {
+                        Label("Submit Sequence", systemImage: "checkmark.circle")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: viewModel.syncToWatch) {
+                        Label("Send to Watch", systemImage: "checkmark.circle")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Saved sequences")
+                        .font(.headline)
+                    ForEach(viewModel.sequences) { seq in
+                        Text(seq.name)
+                            .font(.body)
+                            .padding(.vertical, 2)
+                    }
+                }
+                .padding(.top)
             }
-
-            List(intervals) { interval in
-                Text("\(interval.lengthInSeconds)s \(interval.isRest ? "Rest" : "Work")")
-            }
-
-            Button("Submit") {
-                viewModel.addSequence(intervals, name: newIntervalName)
-                intervals.removeAll()
-                newIntervalName = ""
-            }
-
-            Button("Send to Watch") {
-                viewModel.syncToWatch()
-            }
-
-            List(viewModel.sequences) { seq in
-                Text(seq.name)
-            }
+            .padding()
         }
-        .padding()
+        .navigationTitle("Enter Intervals")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func addInterval() {
+        if let seconds = Int(newIntervalLength), seconds > 0 {
+            intervals.append(Interval(lengthInSeconds: seconds, isRest: newIntervalIsRest))
+            newIntervalLength = ""
+            newIntervalIsRest.toggle()
+        }
+    }
+    
+    private func submitSequence() {
+        guard !newIntervalName.isEmpty else { return }
+        viewModel.addSequence(intervals, name: newIntervalName)
+        intervals.removeAll()
+        newIntervalName = ""
     }
 }
 

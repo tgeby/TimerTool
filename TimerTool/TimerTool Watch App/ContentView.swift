@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct ContentView: View {
 
@@ -38,6 +39,26 @@ struct ContentView: View {
             }
             .frame(maxHeight: .infinity)
             .padding()
+        }
+        .onAppear() {
+            
+            requestHealthKitAccess()
+        }
+    }
+    private func requestHealthKitAccess() {
+        let healthStore = HKHealthStore()
+        let typesToShare: Set = [HKObjectType.workoutType()]
+        let typesToRead: Set = [HKObjectType.workoutType()]
+        print("Requesting HealthKit access...")
+        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
+            if success {
+                print("✅ HealthKit authorization granted.")
+            } else if let error = error {
+                print("❌ HealthKit authorization failed: \(error.localizedDescription)")
+            } else {
+                print("❌ HealthKit authorization failed.")
+            }
+            
         }
     }
 }

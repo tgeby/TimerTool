@@ -14,9 +14,11 @@ struct ExerciseSelectorView: View {
     var body: some View {
         NavigationView {
             VStack {
-                ForEach(viewModel.sequences) { sequence in
-                    NavigationLink(destination: UseTimerView(viewModel: viewModel, selectedSequenceName: "\(sequence.name)")) {
-                        Text(sequence.name)
+                ScrollView {
+                    ForEach(viewModel.sequences) { sequence in
+                        NavigationLink(destination: UseTimerView(selectedSequence: sequence)) {
+                            Text(sequence.name)
+                        }
                     }
                 }
             }

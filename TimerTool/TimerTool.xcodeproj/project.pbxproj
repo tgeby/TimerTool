@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F897BC9D2DE8D0AA009D842E /* PBXContainerItemProxy */ = {
+		F89B98622DED6A2300F4A0A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F897BC732DE8CA32009D842E /* Project object */;
 			proxyType = 1;
@@ -48,14 +48,37 @@
 		F8E932E82DEAB6BE00BCFB46 /* WCSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F86076802DED4D630019C686 /* Exceptions for "TimerTool Watch App" folder in "TimerTool Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WatchAppInfo.plist,
+			);
+			target = F897BC872DE8CA34009D842E /* TimerTool Watch App */;
+		};
+		F86076852DED4F020019C686 /* Exceptions for "TimerTool" folder in "TimerTool" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F897BC7A2DE8CA33009D842E /* TimerTool */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F897BC7D2DE8CA33009D842E /* TimerTool */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F86076852DED4F020019C686 /* Exceptions for "TimerTool" folder in "TimerTool" target */,
+			);
 			path = TimerTool;
 			sourceTree = "<group>";
 		};
 		F897BC8C2DE8CA34009D842E /* TimerTool Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F86076802DED4D630019C686 /* Exceptions for "TimerTool Watch App" folder in "TimerTool Watch App" target */,
+			);
 			path = "TimerTool Watch App";
 			sourceTree = "<group>";
 		};
@@ -131,7 +154,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				F897BC9E2DE8D0AA009D842E /* PBXTargetDependency */,
+				F89B98632DED6A2300F4A0A5 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				F897BC7D2DE8CA33009D842E /* TimerTool */,
@@ -244,10 +267,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F897BC9E2DE8D0AA009D842E /* PBXTargetDependency */ = {
+		F89B98632DED6A2300F4A0A5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F897BC872DE8CA34009D842E /* TimerTool Watch App */;
-			targetProxy = F897BC9D2DE8D0AA009D842E /* PBXContainerItemProxy */;
+			targetProxy = F89B98622DED6A2300F4A0A5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -376,7 +399,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				"INFOPLIST_FILE[sdk=*]" = "TimerTool Watch App/WatchAppInfo.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = teabee.TimerTool;
@@ -406,7 +430,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				"INFOPLIST_FILE[sdk=*]" = "TimerTool Watch App/WatchAppInfo.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = teabee.TimerTool;
@@ -437,7 +462,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				"INFOPLIST_FILE[sdk=*]" = TimerTool/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -469,7 +495,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K996WK83GD;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				"INFOPLIST_FILE[sdk=*]" = TimerTool/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TimerTool;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

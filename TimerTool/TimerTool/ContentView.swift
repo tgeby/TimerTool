@@ -12,31 +12,29 @@ struct ContentView: View {
     @ObservedObject var viewModel: IntervalViewModel
     
     var body: some View {
-        VStack {
-            NavigationView {
-                VStack {
-                    Text("Options")
-                        .fontWeight(.medium)
-                        .font(.system(size: 50))
-                            .dynamicTypeSize(.medium ... .xxLarge)
+        NavigationView {
+            VStack {
+                NavigationLink(destination: EnterIntervalView(viewModel: viewModel)) {
+                    Label("Create a new interval sequence", systemImage: "plus.circle")
+                        .frame(maxWidth: .infinity)
                         .padding()
-                    NavigationLink(destination: EnterIntervalView(viewModel: viewModel)) {
-                        Text("Create a new interval sequence")
-                            .padding()
-                    }
-                    NavigationLink(destination: LibraryView(viewModel: viewModel)) {
-                        Text("Manage interval sequences")
-                            .padding()
-                    }
-//                    NavigationLink(destination: TestView()) {
-//                        Text("Test view")
-//                            .padding()
-//                    }
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(10)
                 }
+                
+                NavigationLink(destination: LibraryView(viewModel: viewModel)) {
+                    Label("Manage interval sequences", systemImage: "books.vertical")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green.opacity(0.1))
+                        .cornerRadius(10)
+                }
+                
+                Spacer()
             }
-            Spacer().frame(height: 200)
+            .padding()
+            .navigationTitle("TimerTool")
         }
-        .padding()
     }
 }
 
