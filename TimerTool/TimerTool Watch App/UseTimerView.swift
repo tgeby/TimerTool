@@ -66,7 +66,6 @@ struct UseTimerView: View {
             workoutManager.startWorkout()
         }
         .onDisappear {
-            workoutManager.stopWorkout()
         }
         .onReceive(timer) { now in
             guard isRunning,
@@ -90,6 +89,7 @@ struct UseTimerView: View {
                     isRunning = false
                     startTime = nil
                     pausedTime = 0
+                    workoutManager.stopWorkout()
                 }
             }
         }
