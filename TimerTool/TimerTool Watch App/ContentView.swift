@@ -41,8 +41,11 @@ struct ContentView: View {
             .padding()
         }
         .onAppear() {
-            
             requestHealthKitAccess()
+            if WorkoutManager.isWorkoutActive {
+                print("Stopping active workout.")
+                WorkoutManager.shared.stopWorkout(force: true)
+            }
         }
     }
     private func requestHealthKitAccess() {

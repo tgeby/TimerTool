@@ -17,7 +17,6 @@ struct UseTimerView: View {
     @State var startTime: Date? = nil
     @State var timeRemaining = 0
     @State var pausedTime: Int = 0
-    @StateObject var workoutManager = WorkoutManager()
     
     let timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()
     
@@ -43,6 +42,7 @@ struct UseTimerView: View {
                         if !intervalList.isEmpty {
                             startTime = Date()
                             isRunning = true
+                            WorkoutManager.shared.startWorkout()
                         }
                     }
                 }
@@ -52,6 +52,7 @@ struct UseTimerView: View {
                 currentInterval = 0
                 pausedTime = 0
                 startTime = nil
+                WorkoutManager.shared.stopWorkout()
                 if !intervalList.isEmpty {
                     timeRemaining = intervalList[0].lengthInSeconds
                 } else {
@@ -63,9 +64,9 @@ struct UseTimerView: View {
             if let first = intervalList.first {
                 timeRemaining = first.lengthInSeconds
             }
-            workoutManager.startWorkout()
         }
         .onDisappear {
+            
         }
         .onReceive(timer) { now in
             guard isRunning,
@@ -89,7 +90,7 @@ struct UseTimerView: View {
                     isRunning = false
                     startTime = nil
                     pausedTime = 0
-                    workoutManager.stopWorkout()
+                    WorkoutManager.shared.stopWorkout()
                 }
             }
         }
