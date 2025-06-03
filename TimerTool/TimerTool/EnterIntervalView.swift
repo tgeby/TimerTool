@@ -9,102 +9,104 @@ import SwiftUI
 import WatchConnectivity
 
 struct EnterIntervalView: View {
-    
+    @ObservedObject var viewModel: IntervalViewModel
     @State private var intervals: [Interval] = []
     @State private var newIntervalLength: String = ""
     @State private var newIntervalIsRest: Bool = false
-    @State private var storedIntervals: [[Interval]] = []
-    @State private var showStoredInterval: Bool = false
-    
-    func addIntervalButton() {
-        if let seconds = Int(newIntervalLength), seconds > 0 {
-            let newInterval = Interval(lengthInSeconds: seconds, isRest: newIntervalIsRest)
-            intervals.append(newInterval)
-            newIntervalLength = "" // Clear input
-        }
-    }
-    
-    func syncIntervalsToWatch() {
-        let intervals = SharedIntervalManager.shared.loadIntervals()
-        guard let data = try? JSONEncoder().encode(intervals) else { return }
+    @State private var newIntervalName: String = ""
 
-        if WCSession.default.isReachable {
-            // Instant message
-            WCSession.default.sendMessage(["intervalsData": data], replyHandler: nil, errorHandler: nil)
-        } else {
-            // Queued for delivery
-            WCSession.default.transferUserInfo(["intervalsData": data])
-        }
-    }
-    
     var body: some View {
-        VStack(spacing: 16) {
-            // Input for new interval length
-            Spacer()
-            HStack {
-                TextField("Seconds", text: $newIntervalLength)
-                    .keyboardType(.numberPad)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 100)
-                Toggle("Is Rest Interval", isOn: $newIntervalIsRest)
-                    .font(.caption)
-                Button(action: {
-                    addIntervalButton()
-                    newIntervalIsRest = false
-                    }) {
-                    Text("Add Interval")
-                }
-            }
-            // List of intervals
-            List(intervals) { interval in
-                HStack{
-                    Text("Interval: \(interval.lengthInSeconds) seconds")
-                    Spacer()
-                    if interval.isRest {
-                        Text("Rest set")
-                    } else {
-                        Text("Work set")
+        ScrollView {
+            VStack(spacing: 24) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Create New Sequence")
+                        .font(.headline)
+                    TextField("Sequence Name", text: $newIntervalName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    HStack {
+                        TextField("Seconds", text: $newIntervalLength)
+                            .keyboardType(.numberPad)
+                            .frame(width: 100)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        Toggle("Rest?", isOn: $newIntervalIsRest)
+                            .toggleStyle(SwitchToggleStyle(tint: .blue))
+                        Button(action: addInterval) {
+                            Label("Add", systemImage: "plus.circle.fill")
+                        }
+                        .disabled(newIntervalLength.isEmpty)
                     }
                 }
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(12)
+                
+                if !intervals.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("New Intervals")
+                            .font(.headline)
+                        ForEach(intervals) { interval in
+                            HStack {
+                                Text("\(interval.lengthInSeconds)s")
+                                Spacer()
+                                Text(interval.isRest ? "Rest" : "Work")
+                                    .foregroundColor(interval.isRest ? .blue : .green)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                }
+                
+                VStack (spacing: 10) {
+                    Button(action: submitSequence) {
+                        Label("Submit Sequence", systemImage: "checkmark.circle")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: viewModel.syncToWatch) {
+                        Label("Send to Watch", systemImage: "checkmark.circle")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Saved sequences")
+                        .font(.headline)
+                    ForEach(viewModel.sequences) { seq in
+                        Text(seq.name)
+                            .font(.body)
+                            .padding(.vertical, 2)
+                    }
+                }
+                .padding(.top)
             }
-            Button (action: {
-                SharedIntervalManager.shared.appendIntervalSequence(intervals)
-                intervals = []
-            }) {
-                Text("Submit")
-            }
-            Spacer()
-            Button (action: {
-                syncIntervalsToWatch()
-            }) {
-                Text("Send to watch")
-            }
-//            Button (action: {
-//                storedIntervals = SharedIntervalManager.shared.loadIntervals()
-//                showStoredInterval = true
-//            }) {
-//                Text("Print stored interval")
-//            }
-//            if showStoredInterval {
-//                List(storedIntervals[0]) { interval in
-//                    HStack{
-//                        Text("Interval: \(interval.lengthInSeconds) seconds")
-//                        Spacer()
-//                        if interval.isRest {
-//                            Text("Rest set")
-//                        } else {
-//                            Text("Work set")
-//                        }
-//                    }
-//                }
-//            } else {
-//                Text("No stored interval to display now")
-//            }
+            .padding()
         }
-        .padding()
+        .navigationTitle("Enter Intervals")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func addInterval() {
+        if let seconds = Int(newIntervalLength), seconds > 0 {
+            intervals.append(Interval(lengthInSeconds: seconds, isRest: newIntervalIsRest))
+            newIntervalLength = ""
+            newIntervalIsRest.toggle()
+        }
+    }
+    
+    private func submitSequence() {
+        guard !newIntervalName.isEmpty else { return }
+        viewModel.addSequence(intervals, name: newIntervalName)
+        intervals.removeAll()
+        newIntervalName = ""
     }
 }
 
 #Preview {
-    EnterIntervalView()
+    EnterIntervalView(viewModel: IntervalViewModel())
 }

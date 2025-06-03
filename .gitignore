@@ -6,6 +6,13 @@ DerivedData/
 *.xcuserstate
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata
+*.xcuserdatad
+*.xcuserdata
+
+# Ignore workspace UI config
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+TimerTool/TimerTool.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
 
 # Keep shared schemes
 !*.xcodeproj/xcshareddata/

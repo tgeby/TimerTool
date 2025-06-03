@@ -7,10 +7,13 @@
 
 import Foundation
 import WatchConnectivity
+import Combine
 
 class WCSessionManager: NSObject, WCSessionDelegate {
     static let shared = WCSessionManager()
 
+    let newDataReceived = PassthroughSubject<Void, Never>()
+    
     override private init() {
         super.init()
         if WCSession.isSupported() {
@@ -35,15 +38,17 @@ class WCSessionManager: NSObject, WCSessionDelegate {
     // Handle incoming data
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         if let data = message["intervalsData"] as? Data,
-           let decoded = try? JSONDecoder().decode([[Interval]].self, from: data) {
+           let decoded = try? JSONDecoder().decode([IntervalSequence].self, from: data) {
             SharedIntervalManager.shared.saveIntervalSequences(decoded)
+            newDataReceived.send()
         }
     }
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
         if let data = userInfo["intervalsData"] as? Data,
-           let decoded = try? JSONDecoder().decode([[Interval]].self, from: data) {
+           let decoded = try? JSONDecoder().decode([IntervalSequence].self, from: data) {
             SharedIntervalManager.shared.saveIntervalSequences(decoded)
+            newDataReceived.send()
         }
     }
 }

@@ -19,6 +19,18 @@ struct Interval: Identifiable, Codable {
     }
 }
 
+struct IntervalSequence: Identifiable, Codable {
+    let id: UUID
+    let sequence: [Interval]
+    let name: String
+    
+    init(id: UUID = UUID(), sequence: [Interval], name: String) {
+        self.id = id
+        self.sequence = sequence
+        self.name = name
+    }
+}
+
 class SharedIntervalManager {
     static let shared = SharedIntervalManager()
     
@@ -29,22 +41,23 @@ class SharedIntervalManager {
         UserDefaults(suiteName: suiteName)
     }
     
-    func saveIntervalSequences(_ intervalSequences: [[Interval]]) {
+    func saveIntervalSequences(_ intervalSequences: [IntervalSequence]) {
         if let encoded = try? JSONEncoder().encode(intervalSequences) {
             defaults?.set(encoded, forKey: key)
         }
     }
     
-    func loadIntervals() -> [[Interval]] {
+    func loadIntervals() -> [IntervalSequence] {
         guard let data = defaults?.data(forKey: key),
-              let decoded = try? JSONDecoder().decode([[Interval]].self, from: data) else {
+              let decoded = try? JSONDecoder().decode([IntervalSequence].self, from: data) else {
             return []
         }
         return decoded
     }
     
-    func appendIntervalSequence(_ intervalSequence: [Interval]) {
-        var allSequences: [[Interval]] = loadIntervals()
+    func appendIntervalSequence(_ intervalSequence: [Interval], _ name: String? = nil) {
+        var allSequences: [IntervalSequence] = loadIntervals()
+        let intervalSequence: IntervalSequence = IntervalSequence(sequence: intervalSequence, name: name ?? "")
         allSequences.append(intervalSequence)
         saveIntervalSequences(allSequences)
     }

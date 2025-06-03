@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app reads health data during workouts.</string>
+	<key>WKCompanionAppBundleIdentifier</key>
+	<string>teabee.TimerTool</string>
+	<key>WKApplication</key>
+	<true/>
+	<key>CFBundleExecutable</key>
+	<string>TimerTool Watch App</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFBundleName</key>
+	<string>TimerTool</string>
+	<key>CFBundleIdentifier</key>
+	<string>teabee.TimerTool.watchkitapp</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This app logs your workouts to the Health app.</string>
+</dict>
+</plist>
