@@ -18,26 +18,24 @@ struct TimerView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 8) {
-                // Header
-                headerView
-                    .layoutPriority(1)
-                
-                // Main timer display
-                timerDisplayView(geometry: geometry)
-                    .layoutPriority(2)
-                
-                // Progress indicators
-                progressView
-                    .layoutPriority(1)
-                
-                // Control buttons
-                controlButtonsView
-                    .layoutPriority(1)
+        Group {
+            if timerManager.currentState != .completed {
+                VStack(spacing: 2) {
+                    // Header
+                    headerView
+                    // Main timer display
+                    timerDisplayView
+                    // Progress indicators
+                    progressView
+                    // Control buttons
+                    controlButtonsView
+                }
+                .padding(.horizontal, 4)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.horizontal, 4)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            else {
+                Text("Timer complete!")
+            }
         }
         .navigationBarBackButtonHidden(timerManager.currentState == .running)
         .onAppear {
@@ -55,28 +53,28 @@ struct TimerView: View {
     // MARK: - View Components
     
     private var headerView: some View {
-        VStack(spacing: 2) {
+        HStack(spacing: 2) {
             Text(sequence.name)
                 .font(.caption2)
                 .foregroundColor(.secondary)
                 .lineLimit(1)
             
             if timerManager.currentInterval != nil {
-                Text("\(timerManager.currentIntervalIndex + 1)/\(sequence.sequence.count)")
+                Text(": \(timerManager.currentIntervalIndex + 1)/\(sequence.sequence.count)")
                     .font(.caption2)
                     .foregroundColor(.secondary)
                 
             }
         }
+        .frame(maxHeight: 25)
     }
     
-    private func timerDisplayView(geometry: GeometryProxy) -> some View {
-        VStack(spacing: 4) {
+    private var timerDisplayView: some View {
+        VStack(spacing: 2) {
             // Time remaining
             Text(formatTime(timerManager.timeRemaining))
-                .font(.system(size: min(geometry.size.width * 0.2, 34), weight: .bold, design: .monospaced))
+                .font(.title2)
                 .foregroundColor(timerManager.currentInterval?.isRest == true ? .blue : .green)
-                .minimumScaleFactor(0.7)
             
             // Interval type
             if let currentInterval = timerManager.currentInterval {
@@ -86,67 +84,37 @@ struct TimerView: View {
                     .foregroundColor(currentInterval.isRest ? .blue : .green)
             }
         }
+        .frame(maxHeight: 40)
+
     }
     
     private var progressView: some View {
-        VStack(spacing: 4) {
-            // Current interval progress
-            ProgressView(value: timerManager.progress)
-                .progressViewStyle(LinearProgressViewStyle(tint: timerManager.currentInterval?.isRest == true ? .blue : .green))
-                .frame(height: 4)
-            
+        Group {
             // Total sequence progress
             ProgressView(value: timerManager.totalProgress)
                 .progressViewStyle(LinearProgressViewStyle(tint: .orange))
                 .frame(height: 2)
+                .padding(.horizontal, 20)
         }
+        .frame(maxHeight: 25)
     }
     
     private var controlButtonsView: some View {
-        HStack(spacing: 12) {
-            // Stop button
-            Button(action: {
-                timerManager.stopTimer()
-                dismiss()
-            }) {
-                Image(systemName: "stop.fill")
-                    .font(.title3)
-                    .foregroundColor(.red)
-            }
-            .buttonStyle(PlainButtonStyle())
-            .disabled(timerManager.currentState == .idle)
-            
-            Spacer()
-            
-            // Main control button
-            Button(action: mainButtonAction) {
+        // Main control button
+        Button(action: mainButtonAction) {
+            HStack {
                 Image(systemName: mainButtonIcon)
-                    .font(.title2)
+                    .font(.caption)
                     .foregroundColor(.white)
             }
-            .buttonStyle(PlainButtonStyle())
-            .background(
-                Circle()
-                    .fill(mainButtonColor)
-                    .frame(width: 50, height: 50)
-            )
-            
-            Spacer()
-            
-            // Next interval button (when paused)
-            if timerManager.currentState == .paused {
-                Button(action: skipToNextInterval) {
-                    Image(systemName: "forward.fill")
-                        .font(.title3)
-                        .foregroundColor(.orange)
-                }
-                .buttonStyle(PlainButtonStyle())
-            } else {
-                // Placeholder for spacing
-                Color.clear
-                    .frame(width: 24, height: 24)
-            }
+            .frame(minWidth: 50, maxWidth: .infinity)
+            .frame(height: 35)
+            .background(mainButtonColor)
+            .cornerRadius(15)
+            .contentShape(RoundedRectangle(cornerRadius: 15))
         }
+        .buttonStyle(PlainButtonStyle())
+        .padding(.horizontal, 50)
     }
     
     // MARK: - Computed Properties
@@ -184,12 +152,6 @@ struct TimerView: View {
         case .paused:
             timerManager.resumeTimer()
         }
-    }
-    
-    private func skipToNextInterval() {
-        // This would require additional logic in TimerStateManager
-        // For now, just resume the timer
-        timerManager.resumeTimer()
     }
     
     // MARK: - Helper Methods

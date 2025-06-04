@@ -56,25 +56,24 @@ struct ExerciseSelectorView: View {
         let totalTime = calculateTotalTime(for: sequence)
         
         return NavigationLink(destination: TimerView(sequence: sequence)) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text(sequence.name)
                     .font(.headline)
-                    .foregroundColor(.primary)
+                    .foregroundColor(Color.white)
                     .lineLimit(2)
                 
                 Text("\(sequence.sequence.count) intervals")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(Color.white)
                 
                 Text("Total: \(formatTime(totalTime))")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(Color.white)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 12)
-            .background(Color(.gray))
-            .cornerRadius(8)
+            .padding()
+            .frame(width: 150, alignment: .leading)
+            .background(Color(red: 80/255, green: 200/255, blue: 120/255))
+            .cornerRadius(20)
         }
         .buttonStyle(PlainButtonStyle())
     }

@@ -28,6 +28,7 @@ class TimerStateManager: ObservableObject {
     @Published var totalElapsedTime: Int = 0
     @Published var currentSequence: IntervalSequence?
     
+    private var sumPreviousIntervals: Int = 0
     private var timer: Timer?
     private var startTime: Date?
     private var pausedDuration: TimeInterval = 0
@@ -143,6 +144,7 @@ class TimerStateManager: ObservableObject {
         
         if currentIntervalIndex < sequence.sequence.count - 1 {
             // Move to next interval
+            sumPreviousIntervals += sequence.sequence[currentIntervalIndex].lengthInSeconds
             currentIntervalIndex += 1
             pausedDuration = 0
             startTime = Date()
@@ -179,6 +181,8 @@ class TimerStateManager: ObservableObject {
     var totalProgress: Double {
         guard let sequence = currentSequence else { return 0 }
         let totalTime = sequence.sequence.reduce(0) { $0 + $1.lengthInSeconds }
-        return Double(totalElapsedTime) / Double(totalTime)
+        guard let interval = currentInterval else { return 0 }
+        let elapsed = interval.lengthInSeconds - timeRemaining
+        return Double(sumPreviousIntervals + elapsed) / Double(totalTime)
     }
 }
